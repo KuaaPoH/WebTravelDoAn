@@ -37,6 +37,11 @@ public partial class TbBlog
 
     public bool IsActive { get; set; }
 
+    public int? DayCreated { get; set; }
+
+    public string? MonthCreated { get; set; }
+
+
     public virtual TbAccount? Account { get; set; }
 
     public virtual TbCategory? Category { get; set; }
