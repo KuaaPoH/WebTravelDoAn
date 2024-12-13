@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WebTravel.Areas.Admin.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebTravel.Models;
@@ -46,6 +47,8 @@ public partial class TravelContext : DbContext
     public virtual DbSet<TbTourReview> TbTourReviews { get; set; }
 
     public virtual DbSet<TbSlide> TbSlides { get; set; }
+
+    public virtual DbSet<TbAdminUser> TbAdminUsers { get; set; }
 
 
 
@@ -327,6 +330,23 @@ public partial class TravelContext : DbContext
             entity.Property(e => e.Image).HasMaxLength(500);
           
         });
+
+
+        modelBuilder.Entity<TbAdminUser>(entity =>
+        {
+            entity.HasKey(e => e.UserID);
+
+            entity.ToTable("tb_AdminUser");
+
+            entity.Property(e => e.UserName).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(50);
+           
+            entity.Property(e => e.Password).HasMaxLength(50);
+          
+
+        
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }
