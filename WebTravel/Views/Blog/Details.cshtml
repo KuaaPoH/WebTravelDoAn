@@ -60,28 +60,29 @@
                 <!-- Comment List End -->
                 <!-- Comment Form Start -->
                 <div class="bg-white mb-3" style="padding: 30px;">
-                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h4>
-                    <form>
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Để lại bình luận</h4>
+                     <form>
+                        <input type="hidden" id="c_blogId" name="blogId" value="@ViewBag.BlogId" /> <!-- Truyền blogId từ Model -->
+
                         <div class="form-group">
                             <label for="name">Name *</label>
-                            <input type="text" class="form-control" id="name">
+                            <input type="text" class="form-control" id="c_name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="c_email">
                         </div>
                         <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website">
+                            <label for="Phone number">Phone number</label>
+                            <input type="text" class="form-control" id="c_phone">
                         </div>
 
                         <div class="form-group">
                             <label for="message">Message *</label>
-                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea id="c_message" cols="30" rows="5" class="form-control"></textarea>
                         </div>
                         <div class="form-group mb-0">
-                            <input type="submit" value="Leave a comment"
-                                   class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                            <button type="submit" id="c_submit" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit">Gửi</button>
                         </div>
                     </form>
                 </div>
@@ -132,17 +133,18 @@
                 <div class="mb-5">
                     <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Các bài viết liên quan</h4>
                     @foreach (var item in blogRelated)
-                    {
+                        {
+                            <a class="d-flex align-items-center text-decoration-none bg-white mb-3"
+                               href="@Url.Action("Details", "Blog", new { alias = item.Alias, id = item.BlogId })"
+                               onclick="event.preventDefault(); window.location.href='@Url.Action("Details", "Blog", new { alias = item.Alias, id = item.BlogId })';">
+                                <img class="img-fluid" src="~/img/@item.Image" width="100" height="100" alt="">
+                                <div class="pl-3">
+                                    <h6 class="m-1">@item.Title</h6>
+                                    <small>@item.CreatedDate?.ToString("dd/MM/yyyy")</small>
+                                </div>
+                            </a>
+                        }
 
-                    
-                    <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="">
-                            <img class="img-fluid" src="~/img/@item.Image" width="100" , height="100" alt ="">
-                        <div class="pl-3">
-                            <h6 class="m-1">@item.Title</h6>
-                            <small>@item.CreatedDate</small>
-                        </div>
-                    </a>
-                    }
                 </div>
 
                 <!-- Tag Cloud -->
@@ -162,3 +164,66 @@
     </div>
 </div>
 <!-- Blog End -->
+    @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#c_submit").click(function (e) {
+                e.preventDefault(); // Ngăn form submit mặc định
+
+                // Lấy giá trị từ các input
+                let _name = $("#c_name").val();
+                let _phone = $("#c_phone").val();
+                let _email = $("#c_email").val();
+                let _message = $("#c_message").val();
+                let _blogId = $("#c_blogId").val(); // Lấy giá trị blogId từ input ẩn
+
+                // Gửi dữ liệu qua AJAX
+                $.ajax({
+                    url: "/Blog/Create", // URL endpoint trong Controller
+                    type: "POST",
+                    data: {
+                        blogId: _blogId,
+                        name: _name,
+                        phone: _phone,
+                        email: _email,
+                        message: _message
+                    },
+                    success: function (result) {
+                        if (result.status) { // Nếu trả về thành công
+                            let comment = result.comment;
+
+                            // Tạo bình luận mới dựa trên dữ liệu JSON trả về
+                            let newComment = `
+                                <div class="media mb-4">
+                                    <img src="/img/${comment.image}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <div class="media-body">
+                                        <h6>${comment.name} <small><i>${comment.createdDate}</i></small></h6>
+                                        <p>${comment.detail}</p>
+                                    </div>
+                                </div>
+                            `;
+
+                            // Chèn bình luận mới vào danh sách (ở đầu danh sách)
+                            $(".bg-white").first().prepend(newComment);
+
+                            // Reset các ô input
+                            $("#c_name").val("");
+                            $("#c_phone").val("");
+                            $("#c_email").val("");
+                            $("#c_message").val("");
+
+                            toastr.success('Bình luận đã gửi thành công!');
+                        } else {
+                            toastr.error(result.message || 'Gửi không thành công!');
+                        }
+                    },
+                    error: function () {
+                        toastr.error('Có lỗi xảy ra, vui lòng thử lại!');
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    }
