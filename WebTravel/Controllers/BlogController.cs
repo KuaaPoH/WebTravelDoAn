@@ -23,6 +23,7 @@ namespace Harmic.Controllers
             {
                 return NotFound();
             }
+
             var blog = await _context.TbBlogs
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
@@ -30,6 +31,10 @@ namespace Harmic.Controllers
                 return NotFound();
             }
             ViewBag.blogComment = _context.TbBlogComments.Where(i => i.BlogId == id).ToList();
+            ViewBag.blogRelated = _context.TbBlogs.
+                Where( i => i.BlogId != id && i.CategoryId == blog.CategoryId).Take(3).
+                OrderByDescending(i=>i.BlogId).ToList();
+
             return View(blog);
         }
     }

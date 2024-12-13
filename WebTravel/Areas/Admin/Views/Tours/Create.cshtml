@@ -50,6 +50,15 @@
                         </div>
 
                         <div class="form-group">
+                            <label asp-for="Detail" class="col-sm-2 col-form-label">Chi tiết</label>
+                            <div class="col-sm-12">
+                                <textarea asp-for="Detail" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
                             <label asp-for="CategoryTourId" class="col-sm-2 col-form-label">Danh mục</label>
                             <div class="col-sm-12">
                                 <select asp-for="CategoryTourId" class="form-control" asp-items="ViewBag.CategoryTourId">
@@ -59,8 +68,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group mt-3">
-                            <label asp-for="Image" class="control-label">Chọn Ảnh</label>
+                        <div class="form-group col-sm-12">
+                            <label asp-for="Image" class="col-sm-2 col-form-label">Chọn ảnh</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-success" onclick="openDialog()">Chọn một ảnh</button>
@@ -110,3 +119,8 @@
 </section>
 
 
+
+@{
+    var summerNote = new WebTravel.Areas.Admin.Models.SummerNote("#Detail");
+    <partial name="_SummerNote" model="summerNote" />
+}
