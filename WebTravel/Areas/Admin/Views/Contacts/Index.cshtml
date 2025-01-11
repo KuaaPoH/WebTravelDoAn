@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebTravel.Models.TbContact>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pagetitle">
+    <h1>Liên hệ</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+            <li class="breadcrumb-item">Contacts</li>
+            <li class="breadcrumb-item active">Index</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    
+
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Tin nhắn</th>
+                                <th scope="col">Gửi lúc</th>
+                             
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 1;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(i++)</th>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>     
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+
+                                  
+                                    <td>
+                                    
+                                        <a asp-action="Delete" asp-route-id="@item.ContactId" class="btn btn-outline-danger">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- End Default Table Example -->
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</section>
+

@@ -1,18 +1,16 @@
-﻿@model IEnumerable<WebTravel.Models.TbBlog>
+﻿@model IEnumerable<WebTravel.Models.TbSlide>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="pagetitle">
-    <h1>Quản lý Blog du lịch</h1>
+    <h1>Quản lý Banner Quảng Cáo</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
-            <li class="breadcrumb-item">Blogs</li>
+            <li class="breadcrumb-item">Slides</li>
             <li class="breadcrumb-item active">Index</li>
         </ol>
     </nav>
@@ -31,12 +29,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Tên Blog</th>
-                                <th scope="col">Danh mục</th>
+                                <th scope="col">Tiêu đề</th>
+                              
                                 <th scope="col">Ảnh</th>
-                                <th scope="col">Mô tả</th>
-                                <th scope="col">Chi tiết</th>
-                                <th scope="col">Thời gian(ngày)</th>
+                              
                                 <th scope="col">Hiện thị</th>
                                 <th></th>
                             </tr>
@@ -50,12 +46,9 @@
                                 <tr>
                                     <th scope="row">@(i++)</th>
                                     <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Category.Title)</td>
+                                  
                                     <td><img src="~/img/@Html.DisplayFor(modelItem => item.Image)" width="50" , height="50" /></td>
-                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-
-                               
-                                    <td>@Html.DisplayFor(modelItem => item.DayCreated)</td>
+                                   
 
                                     <td>
                                         @if (item.IsActive)
@@ -69,9 +62,9 @@
                                     </td>
 
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.BlogId" class="btn btn-outline-warning">Sửa</a>
-                                        <a asp-action="Details" asp-route-id="@item.BlogId" class="btn btn-outline-primary">Chi tiết</a>
-                                        <a asp-action="Delete" asp-route-id="@item.BlogId" class="btn btn-outline-danger">Xóa</a>
+                                        <a asp-action="Edit" asp-route-id="@item.SlideId" class="btn btn-outline-warning">Sửa</a> -
+                              
+                                        <a asp-action="Delete" asp-route-id="@item.SlideId" class="btn btn-outline-danger">Xóa</a>
                                     </td>
                                 </tr>
                             }
@@ -90,4 +83,3 @@
 
 
 </section>
-
