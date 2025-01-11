@@ -15,6 +15,7 @@ namespace WebTravel.Utilities
         {
             return SlugGenerator.SlugGenerator.GenerateSlug(title);
         }
+   
 
         public static string MD5Hash(string text)
         {
@@ -33,10 +34,15 @@ namespace WebTravel.Utilities
         {
             string str = MD5Hash(text);
             for (int i = 0;i<=5;i++) 
-                str = MD5Hash(str + "_" + str);
+                str = MD5Hash(str + "_" + str); 
             return str;
         }
-
+        public static bool IsLogin()
+        {
+            if (string.IsNullOrEmpty(Function._Username) || string.IsNullOrEmpty(Function._Email) || (Function._UserID <= 0))
+                return false;
+            return true;
+        }
 
     }
 }

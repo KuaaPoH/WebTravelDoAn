@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebTravel.Utilities;
 
 namespace WebTravel.Areas.Admin.Controllers
 {
@@ -8,6 +9,7 @@ namespace WebTravel.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+       
             return View();
         }
     }

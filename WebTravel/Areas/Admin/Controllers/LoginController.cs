@@ -31,7 +31,7 @@ namespace WebTravel.Areas.Admin.Controllers
                 return NotFound();
             }
             string pw = Function.MD5Password(user.Password);
-            var check = _context.TbAdminUsers.Where(m => (m.Email == user.Email) && (m.Password == pw)).FirstOrDefault();
+            var check = _context.TbAdminUsers.Where(m => (m.Email == user.Email) && (m.Password == pw)).FirstOrDefault();   
             if (check == null)
             {
                 Function._Message = "Lỗi Tên Đăng Nhập hoặc Mật Khẩu";

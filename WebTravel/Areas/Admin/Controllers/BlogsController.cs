@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebTravel.Models;
+using WebTravel.Utilities;
 
 namespace WebTravel.Areas.Admin.Controllers
 {
@@ -22,6 +23,8 @@ namespace WebTravel.Areas.Admin.Controllers
         // GET: Admin/Blogs
         public async Task<IActionResult> Index()
         {
+          
+
             var travelContext = _context.TbBlogs.Include(t => t.Account).Include(t => t.Category);
             return View(await travelContext.ToListAsync());
         }

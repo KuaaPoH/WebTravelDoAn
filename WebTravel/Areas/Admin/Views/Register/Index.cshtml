@@ -1,4 +1,5 @@
 ﻿@model WebTravel.Areas.Admin.Models.TbAdminUser
+@using WebTravel.Utilities
 @{
     Layout = "";
 }
@@ -99,8 +100,10 @@
                     </div>
 
                                         <div class="col-12 text-center text-danger">
-                                            
-                                                <h6>@WebTravel.Utilities.Function._Message</h6>
+                                            <h6>
+                                                @Function._MessageEmail
+                                            </h6>
+                                           
 
                                             
                                         </div>

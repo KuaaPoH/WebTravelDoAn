@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebTravel.Models;
+using WebTravel.Utilities;
 
 namespace WebTravel.Areas.Admin.Controllers
 {
@@ -22,6 +23,7 @@ namespace WebTravel.Areas.Admin.Controllers
         // GET: Admin/Menus
         public async Task<IActionResult> Index()
         {
+           
             return View(await _context.TbMenus.ToListAsync());
         }
 
