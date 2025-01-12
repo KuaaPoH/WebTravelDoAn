@@ -35,8 +35,8 @@
                                 <th scope="col">Danh mục</th>
                                 <th scope="col">Ảnh</th>
                                 <th scope="col">Mô tả</th>
-                                <th scope="col">Chi tiết</th>
-                                <th scope="col">Thời gian(ngày)</th>
+                              
+                                <th scope="col">Ngày tạo</th>
                                 <th scope="col">Hiện thị</th>
                                 <th></th>
                             </tr>
@@ -55,7 +55,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Description)</td>
 
                                
-                                    <td>@Html.DisplayFor(modelItem => item.DayCreated)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
 
                                     <td>
                                         @if (item.IsActive)
