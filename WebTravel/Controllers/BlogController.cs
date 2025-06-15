@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Harmic.Controllers
+namespace WebTravel.Controllers
 {
     public class BlogController : Controller
     {
@@ -24,21 +24,28 @@ namespace Harmic.Controllers
                 return NotFound();
             }
 
-            var blog = await _context.TbBlogs
-                .FirstOrDefaultAsync(m => m.BlogId == id);
+            var blog = await _context.TbBlogs.FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
                 return NotFound();
             }
 
+            // Tăng lượt xem
+            blog.CountView = (blog.CountView ?? 0) + 1;
+            _context.Update(blog);
+            await _context.SaveChangesAsync();
+
             ViewBag.BlogId = id;
             ViewBag.blogComment = _context.TbBlogComments.Where(i => i.BlogId == id).ToList();
-            ViewBag.blogRelated = _context.TbBlogs.
-                Where(i => i.BlogId != id && i.CategoryId == blog.CategoryId).Take(3).
-                OrderByDescending(i => i.BlogId).ToList();
+            ViewBag.blogRelated = _context.TbBlogs
+                .Where(i => i.BlogId != id && i.CategoryId == blog.CategoryId)
+                .OrderByDescending(i => i.BlogId)
+                .Take(3)
+                .ToList();
 
             return View(blog);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(int blogId, string name, string phone, string email, string message)
         {

@@ -41,6 +41,9 @@ public partial class TbBlog
 
     public string? MonthCreated { get; set; }
 
+    public int? CountView { get; set; }
+
+
 
     public virtual TbAccount? Account { get; set; }
 

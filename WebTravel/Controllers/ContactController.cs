@@ -16,26 +16,29 @@ namespace WebTravel.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(string name, string phone, string email, string message)
+        public async Task<IActionResult> Create(string name, string phone, string email, string message)
         {
             try
             {
-                TbContact contact = new TbContact();
-                contact.Name = name;
-                contact.Phone = phone;
-                contact.Email = email;
-                contact.Message = message;
-                contact.CreatedDate = DateTime.Now;
+                TbContact contact = new TbContact
+                {
+                    Name = name,
+                    Phone = phone,
+                    Email = email,
+                    Message = message,
+                    CreatedDate = DateTime.Now
+                };
+
                 _context.Add(contact);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // ← Bắt buộc phải await
 
                 return Json(new { status = true });
-
             }
             catch
             {
                 return Json(new { status = false });
             }
         }
+
     }
 }

@@ -1,10 +1,15 @@
-/******* Bootstrap Theming ********/
+﻿/******* Bootstrap Theming ********/
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -361,6 +366,7 @@ template {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+  
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
