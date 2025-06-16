@@ -4,9 +4,6 @@
     List<TbBlog> blogRelated = ViewBag.blogRelated;
 }
 
-
-
-
 <!-- Blog Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -175,14 +172,14 @@
     <script>
         $(document).ready(function () {
             $("#c_submit").click(function (e) {
-                e.preventDefault(); // Ngăn form submit mặc định
+                e.preventDefault(); 
 
                 // Lấy giá trị từ các input
                 let _name = $("#c_name").val();
                 let _phone = $("#c_phone").val();
                 let _email = $("#c_email").val();
                 let _message = $("#c_message").val();
-                let _blogId = $("#c_blogId").val(); // Lấy giá trị blogId từ input ẩn
+                let _blogId = $("#c_blogId").val(); 
 
                 // Gửi dữ liệu qua AJAX
                 $.ajax({

@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<WebTravel.Models.TbBlog>
 
-@foreach (var item in Model.Take(3)) // Giới hạn 3 bài viết
+@foreach (var item in Model.Take(3))
 {
     string sUrl = $"/Blog/{item.Alias}-{item.BlogId}.html";
     <div class="col-lg-4 col-md-6 mb-4 pb-2">
-        <div class="blog-item">
+        <div class="blog-item h-100 d-flex flex-column">
+
             <div class="position-relative">
                 <a href="@sUrl">
                     <img class="img-fluid w-100" src="~/img/@(string.IsNullOrEmpty(item.Image) ? "default.jpg" : item.Image)" alt="@item.Title">
@@ -14,11 +15,12 @@
                     <small class="text-white text-uppercase">@item.MonthCreated</small>
                 </div>
             </div>
-            <div class="bg-white p-4">
+            <div class="bg-white p-4 flex-fill d-flex flex-column">
+
                 <div class="d-flex mb-2">
                     <a class="text-primary text-uppercase text-decoration-none" href="">@item.CreatedBy</a>
                     <span class="text-primary px-2">|</span>
-                    <a class="text-primary text-uppercase text-decoration-none" href="">@item.SeoTitle</a>
+                    <a class="text-primary text-uppercase text-decoration-none" href="">@item.SeoKeywords</a>
                     <span class="text-primary px-2">|</span>
                     <span class="text-primary text-uppercase text-decoration-none">
 

@@ -51,7 +51,7 @@ namespace WebTravel.Controllers
         {
             try
             {
-                // Kiểm tra xem blogId có hợp lệ không
+                
                 var blog = await _context.TbBlogs.FirstOrDefaultAsync(b => b.BlogId == blogId);
                 if (blog == null)
                 {
@@ -68,10 +68,10 @@ namespace WebTravel.Controllers
                     Detail = message,
                     CreatedDate = DateTime.Now,
                     IsActive = true,
-                    Image = "avatar.jpg", // Ảnh mặc định
+                    Image = "avatar.jpg", 
                 };
 
-                // Thêm vào cơ sở dữ liệu
+               
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
 

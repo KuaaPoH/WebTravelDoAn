@@ -9,6 +9,15 @@
 html {
     scroll-behavior: smooth;
 }
+.blog-item .h5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 3em; /* Điều chỉnh phù hợp font */
+}
+
+
 
 :root {
   --blue: #007bff;
@@ -60,7 +69,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
